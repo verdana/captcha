@@ -188,6 +188,7 @@ class Captcha extends AbstractCaptcha
     // }}}
 }
 
+/**
 $opt = array(
     'width'      => 150,
     'height'     => 35,
@@ -198,9 +199,9 @@ $opt = array(
     'bgColor'    => array('r' => 18,  'g' => 18,  'b' => 18),
     'textColor'  => array('r' => 255, 'g' => 255, 'b' => 255),
 );
-
-$cap = new Captcha($opt);
-$cap->create();
+$captcha = new Captcha($opt);
+$captcha->create();
+**/
 
 /*- vim: set ff=unix shiftwidth=4 tabstop=4 expandtab: -*/ 
 
