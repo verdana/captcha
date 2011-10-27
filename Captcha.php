@@ -72,7 +72,7 @@ class Captcha extends AbstractCaptcha
      */
     public function create()
     {
-        $fontPath = $this->fontDir . $this->font;
+        $fontPath = __DIR__ . '/' . $this->fontDir . $this->font;
         if (!file_exists($fontPath)) {
             throw new \Exception('Image Captcha requires font');
         }
@@ -113,7 +113,7 @@ class Captcha extends AbstractCaptcha
 
         // 是否使用背景图片?
         if (!empty($this->background)) {
-            $background = $this->imageDir . $this->background;
+            $background = __DIR__ . '/' . $this->imageDir . $this->background;
             if (!file_exists($background)) {
                 throw new \Exception("Image Captcha can not locate background image");
             }

@@ -30,11 +30,11 @@ abstract class AbstractCaptcha
         // Images
         'width'      => 100,
         'height'     => 24,
-        'background' => '1.gif',
+        'background' => 'paper.gif',
         'bgFillType' => 0, // 0: 平铺, 1: 拉伸
         'chars'      => 'abcdefghijkmnpqrstuvwxyz23456789',
         'length'     => 6,
-        'font'       => 'font16.ttf',
+        'font'       => 'Dink.ttf',
         'fontSize'   => 14,
         'bgColor'    => array('r' => 255, 'g' => 255, 'b' => 255),
         'textColor'  => array('r' => 0,   'g' => 0,   'b' => 0),
