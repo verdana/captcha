@@ -53,13 +53,26 @@ class Captcha extends AbstractCaptcha
     {
         parent::__construct($options);
 
-        // Start session
-        session_start();
-
         // 生成一段随机的字符串，并保存到设置中
         // TODO 支持字典模式
         $this->_word = $this->random();
+
+        // 保存到 Session
+        session_start();
         $_SESSION['Captcha'] = $this->_word;
+    }
+    // }}}
+
+    /* public getWord() {{{ */ 
+    /**
+     * 返回随机字符串
+     * 
+     * @access public
+     * @return void
+     */
+    public function getWord()
+    {
+        return $this->_word;
     }
     // }}}
 
