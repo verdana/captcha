@@ -75,7 +75,6 @@ abstract class AbstractCaptcha
                 }
             }
         }
-        exit;
     }
     // }}}
 
