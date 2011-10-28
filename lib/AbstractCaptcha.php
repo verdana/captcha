@@ -66,10 +66,16 @@ abstract class AbstractCaptcha
         if (count($options)) {
             foreach ($options as $k => $v) {
                 if (isset($this->_data[$k])) {
+                    if (false !== stripos($k, 'color')) {
+                        if (is_string($v)) {
+                            $v = $this->toRGB($v);
+                        }
+                    }
                     $this->_data[$k] = $v;
                 }
             }
         }
+        exit;
     }
     // }}}
 
@@ -115,6 +121,41 @@ abstract class AbstractCaptcha
         if (isset($this->_data[$key])) {
             $this->_data[$key] = $val;
         }
+    }
+    // }}}
+
+    /* protected toRGB(string $color) {{{ */ 
+    /**
+     * toRGB
+     * 
+     * @param string $color 
+     * @access protected
+     * @return void
+     */
+    protected function toRGB($color)
+    {
+        $color = ltrim($color, '#');
+        if (!preg_match("/^[0-9a-f]{3}$|^[0-9a-f]{6}$/i", $color, $matches)) {
+            throw new \Exception("Invalid HTML hex color code");
+        }
+        if (strlen($color) == 6) {
+            $r = $color[0] . $color[1];
+            $g = $color[2] . $color[3];
+            $b = $color[4] . $color[5];
+        } elseif (strlen($color) == 3) {
+            $r = $color[0] . $color[0];
+            $g = $color[1] . $color[1];
+            $b = $color[2] . $color[2];
+        }
+        $r = hexdec($r);
+        $g = hexdec($g);
+        $b = hexdec($b);
+
+        return array(
+            'r' => $r,
+            'g' => $g,
+            'b' => $b,
+        );
     }
     // }}}
 }
