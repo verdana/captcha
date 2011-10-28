@@ -1,3 +1,6 @@
+<?php 
+session_start();
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -53,7 +56,6 @@
         <div id="content">
             <img src="./code.php" />
             <br/>
-
             <?php
             $content = highlight_file('code.php');
             ?>
