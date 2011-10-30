@@ -14,8 +14,8 @@ $opt = array(
     'font'       => 'Dink.ttf',     // font path or 'random'
     'fontSize'   => 24,
     'bgColor'    => '#000',
-    'textColor'  => '#FFF',
-    //'textColor'  => array('#FFF', '#CCC', '#FF0000', '#00FFFF', '#00CC00'),
+    //'textColor'  => '#FFF',
+    'textColor'  => array('#666', '#999', '#FF0000', '#00FF00', '#0000FF', '#00FFFF', '#939', '#FCC'),
 );
 
 $captcha = new Captcha($opt);
