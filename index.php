@@ -54,10 +54,10 @@ session_start();
             <h1>Captcha Sample</h1>
         </header>
         <div id="content">
-            <img src="./code.php" />
+            <img src="./image.php" />
             <br/>
             <?php
-            $content = highlight_file('code.php');
+            $content = highlight_file('image.php');
             ?>
             <br style="clear: both" />
         </div>
