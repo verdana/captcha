@@ -95,7 +95,7 @@ class Captcha extends AbstractCaptcha
         $height    = $this->height;
         $size      = $this->fontSize;
         $image     = $this->createCanvas($width, $height);
-        $textColor = ImageColorAllocate($image, $this->textColor['r'], $this->textColor['g'], $this->textColor['b']);
+        // $textColor = ImageColorAllocate($image, $this->textColor['r'], $this->textColor['g'], $this->textColor['b']);
 
         $hpos = $size; // horizontal pos
         $word = $this->getWord();
@@ -112,8 +112,11 @@ class Captcha extends AbstractCaptcha
                 $char = $func($char);
             }
 
-            $vpos = mt_rand($size * 1.3, $size * 2.0); // random vertical pos
-            ImageFtText($image, $size, mt_rand(-25, 50), $hpos, $vpos, $textColor, $fontPath, $char);
+            // text color
+            $color = $this->textColor($image);
+            $vpos  = mt_rand($size * 1.3, $size * 2.0); // random vertical pos
+            ImageFtText($image, $size, mt_rand(-25, 50), $hpos, $vpos, $color, $fontPath, $char);
+
             $hpos += mt_rand($size, $size * 1.8);
         }
 
@@ -198,10 +201,21 @@ class Captcha extends AbstractCaptcha
     }
     // }}}
 
-    protected function allocateColor($image)
+    /* protected textColor($image) {{{ */ 
+    /**
+     * 随机字体颜色
+     * 
+     * @param mixed $image 
+     * @access protected
+     * @return void
+     */
+    protected function textColor(&$image)
     {
-        static $color;
+        $key   = array_rand($this->textColor);
+        $color = $this->textColor[$key];
+        return ImageColorAllocate($image, $color['r'], $color['g'], $color['b']);
     }
+    // }}}
 
     /* protected preventCache() {{{ */ 
     /**

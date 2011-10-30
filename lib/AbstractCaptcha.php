@@ -26,7 +26,7 @@ abstract class AbstractCaptcha
         'imageDir'   => 'backgrounds/',
         'fontDir'    => 'fonts/',
         'dictFile'   => 'dict.dat',
-              
+
         // Images
         'width'      => 250,
         'height'     => 50,
@@ -66,20 +66,24 @@ abstract class AbstractCaptcha
         // 覆盖默认配置信息
         if (count($options)) {
             foreach ($options as $k => $v) {
-                if (isset($this->_data[$k])) {
-                    if (false !== stripos($k, 'color')) {
-                        if (is_array($v)) {
-                            foreach ($v as &$color) {
-                                if (is_string($color)) {
-                                    $color = $this->toRGB($v);
-                                }
-                            }
-                        } elseif (is_string($v)) {
-                            $v = $this->toRGB($v);
-                        }
-                    }
-                    $this->_data[$k] = $v;
+                if (!isset($this->_data[$k])) {
+                    continue;
                 }
+
+                // 字体颜色
+                if ($k == 'textColor') {
+                    $v = (array) $v;
+                }
+
+                // 转换所有颜色代码为 RGB
+                if (false !== stripos($k, 'color')) {
+                    if (is_array($v)) {
+                        $v = array_map(array($this, 'toRGB'), $v);
+                    } elseif (is_string($v)) {
+                        $v = $this->toRGB($v);
+                    }
+                }
+                $this->_data[$k] = $v;
             }
         }
     }
