@@ -101,6 +101,15 @@ class Captcha extends AbstractCaptcha
         $word = $this->getWord();
         for ($i = 0; $i < $this->length; $i ++) {
             $char = $word[$i];
+            if ($this->charCase == 'upper') {
+                $char = strtoupper($char);
+            } elseif ($this->charCase == 'lower') {
+                $char = strtolower($char);
+            } elseif ($this->charCase == 'random') {
+                $func = (rand(1, 10) < 5) ? 'strtolower' : 'strtoupper'; // 50%
+                $char = $func($char);
+            }
+
             $vpos = mt_rand($size * 1.3, $size * 2.0); // random vertical pos
             ImageFtText($image, $size, mt_rand(-25, 50), $hpos, $vpos, $textColor, $fontPath, $char);
             $hpos += mt_rand($size, $size * 1.8);
