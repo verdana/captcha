@@ -90,24 +90,21 @@ class Captcha extends AbstractCaptcha
             throw new \Exception('Image Captcha requires font');
         }
 
-        // 在生成的随机字符串中随机插入空白字符
-        $word  = '';
-        $chars = str_split($this->getWord());
-        foreach ($chars as $char) {
-            $word .= $char . str_repeat(' ', rand(0,2));
-        }
-        $word = trim($word);
-
-        // 生成图片
+        // create the image
         $width     = $this->width;
         $height    = $this->height;
         $size      = $this->fontSize;
         $image     = $this->createCanvas($width, $height);
         $textColor = ImageColorAllocate($image, $this->textColor['r'], $this->textColor['g'], $this->textColor['b']);
-        $textBox   = ImageFtBbox($size, 0, $fontPath, $word);
-        $x = $textBox[0] + ($width  / 2) - ($textBox[4] / 2) - 5;
-        $y = $textBox[1] + ($height / 2) - ($textBox[5] / 2) - 5;
-        ImageFtText($image, $size, 0, $x, $y, $textColor, $fontPath, $word);
+
+        $hpos = $size; // horizontal pos
+        $word = $this->getWord();
+        for ($i = 0; $i < $this->length; $i ++) {
+            $char = $word[$i];
+            $vpos = mt_rand($size * 1.3, $size * 2.0); // random vertical pos
+            ImageFtText($image, $size, mt_rand(-25, 50), $hpos, $vpos, $textColor, $fontPath, $char);
+            $hpos += mt_rand($size, $size * 1.8);
+        }
 
         // prevent client side caching
         $this->preventCache();
@@ -187,6 +184,11 @@ class Captcha extends AbstractCaptcha
         return substr($shuffle, 0, $this->length);
     }
     // }}}
+
+    protected function allocateColor($image)
+    {
+        static $color;
+    }
 
     /* protected preventCache() {{{ */ 
     /**
