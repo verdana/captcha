@@ -4,10 +4,10 @@ use net\phpvim\Captcha;
 require_once 'lib/Captcha.php';
 
 $opt = array(
-    'width'      => 250,
-    'height'     => 35,
+    'width'      => 200,
+    'height'     => 60,
     'font'       => 'Dink.ttf',
-    'fontSize'   => 18,
+    'fontSize'   => 22, // px
     'background' => 'absolute.gif',
     'bgFillType' => 0, // 平铺
     'bgColor'    => '#000',
