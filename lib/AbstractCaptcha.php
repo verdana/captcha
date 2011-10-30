@@ -33,6 +33,7 @@ abstract class AbstractCaptcha
         'background' => 'paper.gif',
         'bgFillType' => 0, // 0: 平铺, 1: 拉伸
         'chars'      => 'abcdefghjkmnpqrstuvwxyz23456789',
+        'case'       => 'upper',
         'length'     => 6,
         'font'       => 'Dink.ttf',
         'fontSize'   => 14,
