@@ -141,14 +141,16 @@ class Captcha extends AbstractCaptcha
                 throw new \Exception("Can not load background image");
             }
 
+            $fillType = strtolower($this->bgFillType);
+
             // 平铺背景图
-            if ($this->bgFillType == 0) {
+            if ($fillType == 'tile') {
                 ImageSetTile($image, $bgImg);
                 ImageFilledRectangle($image, 0, 0, 800, 600, IMG_COLOR_TILED);
             }
 
             // 拉伸背景图
-            if ($this->bgFillType == 1) {
+            if ($fillType == 'stretch') {
                 $w = ImageSx($bgImg);
                 $h = ImageSy($bgImg);
                 ImageCopyResampled($image, $bgImg, 0, 0, 0, 0, $width, $height, $w, $h);
