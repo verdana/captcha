@@ -101,6 +101,8 @@ class Captcha extends AbstractCaptcha
         $word = $this->getWord();
         for ($i = 0; $i < $this->length; $i ++) {
             $char = $word[$i];
+
+            // convert char to low/upper/random case.
             if ($this->charCase == 'upper') {
                 $char = strtoupper($char);
             } elseif ($this->charCase == 'lower') {
