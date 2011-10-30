@@ -4,14 +4,17 @@ use net\phpvim\Captcha;
 require_once 'lib/Captcha.php';
 
 $opt = array(
-    'width'      => 200,
+    'width'      => 250,
     'height'     => 60,
     'font'       => 'Dink.ttf',
-    'fontSize'   => 22, // px
+    //'font'     => 'random',
+    'fontSize'   => 24, // px
+    'fontSize'   => 24, // px
     'background' => 'absolute.gif',
     'bgFillType' => 0, // 平铺
     'bgColor'    => '#000',
     'textColor'  => '#FFF',
+    //'textColor' => array('#FFF', '#CCC', '#FF0000', '#00FFFF', '#00CC00'),
 );
 
 $captcha = new Captcha($opt);
