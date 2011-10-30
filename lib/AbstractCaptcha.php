@@ -28,11 +28,11 @@ abstract class AbstractCaptcha
         'dictFile'   => 'dict.dat',
               
         // Images
-        'width'      => 100,
-        'height'     => 24,
+        'width'      => 250,
+        'height'     => 50,
         'background' => 'paper.gif',
         'bgFillType' => 0, // 0: 平铺, 1: 拉伸
-        'chars'      => 'abcdefghijkmnpqrstuvwxyz23456789',
+        'chars'      => 'abcdefghjkmnpqrstuvwxyz23456789',
         'length'     => 6,
         'font'       => 'Dink.ttf',
         'fontSize'   => 14,
