@@ -67,7 +67,13 @@ abstract class AbstractCaptcha
             foreach ($options as $k => $v) {
                 if (isset($this->_data[$k])) {
                     if (false !== stripos($k, 'color')) {
-                        if (is_string($v)) {
+                        if (is_array($v)) {
+                            foreach ($v as &$color) {
+                                if (is_string($color)) {
+                                    $color = $this->toRGB($v);
+                                }
+                            }
+                        } elseif (is_string($v)) {
                             $v = $this->toRGB($v);
                         }
                     }
