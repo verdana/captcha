@@ -17,35 +17,34 @@
  */
 
 /**
- * @namespace 
+ * @namespace
  */
 namespace net\phpvim;
-
 require_once 'AbstractCaptcha.php';
 
 /**
  * Captcha Generator
- * 
- * @package 
+ *
+ * @package
  * @copyright Copyright (C) 2011
- * @author Verdana Mu 
- * @license 
+ * @author Verdana Mu
+ * @license
  */
 class Captcha extends AbstractCaptcha
 {
     /**
      * 随机字符串
-     * 
+     *
      * @var mixed
      * @access private
      */
     private $_word;
 
-    /* public __construct(array $options) {{{ */ 
+    /* public __construct(array $options) {{{ */
     /**
      * __construct
-     * 
-     * @param array $options 
+     *
+     * @param array $options
      * @access public
      * @return void
      */
@@ -63,10 +62,10 @@ class Captcha extends AbstractCaptcha
     }
     // }}}
 
-    /* public getWord() {{{ */ 
+    /* public getWord() {{{ */
     /**
      * 返回随机字符串
-     * 
+     *
      * @access public
      * @return void
      */
@@ -76,10 +75,10 @@ class Captcha extends AbstractCaptcha
     }
     // }}}
 
-    /* public create() {{{ */ 
+    /* public create() {{{ */
     /**
      * 生成图片
-     * 
+     *
      * @access public
      * @return void
      */
@@ -130,12 +129,12 @@ class Captcha extends AbstractCaptcha
     }
     // }}}
 
-    /* protected createCanvas($width, $height) {{{ */ 
+    /* protected createCanvas($width, $height) {{{ */
     /**
      * 生成初始的图片模型
-     * 
-     * @param mixed $width 
-     * @param mixed $height 
+     *
+     * @param mixed $width
+     * @param mixed $height
      * @access protected
      * @return void
      */
@@ -178,11 +177,11 @@ class Captcha extends AbstractCaptcha
     }
     // }}}
 
-    /* protected random() {{{ */ 
+    /* protected random() {{{ */
     /**
      * 生成随即的字符串
      * 每个字符之间将被随机插入1-3个空格
-     * 
+     *
      * @access protected
      * @return void
      */
@@ -201,11 +200,11 @@ class Captcha extends AbstractCaptcha
     }
     // }}}
 
-    /* protected textColor($image) {{{ */ 
+    /* protected textColor($image) {{{ */
     /**
      * 随机字体颜色
-     * 
-     * @param mixed $image 
+     *
+     * @param mixed $image
      * @access protected
      * @return void
      */
@@ -217,10 +216,10 @@ class Captcha extends AbstractCaptcha
     }
     // }}}
 
-    /* protected preventCache() {{{ */ 
+    /* protected preventCache() {{{ */
     /**
      * preventCache
-     * 
+     *
      * @access protected
      * @return void
      */
@@ -240,5 +239,5 @@ class Captcha extends AbstractCaptcha
     // }}}
 }
 
-/*- vim: set ff=unix shiftwidth=4 tabstop=4 expandtab: -*/ 
+/*- vim: set ff=unix shiftwidth=4 tabstop=4 expandtab: -*/
 
