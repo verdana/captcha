@@ -1,23 +1,18 @@
 <?php
 /**
- * @namespace 
- */
-namespace net\phpvim;
-
-/**
- * AbstractCaptcha 
- * 
+ * AbstractCaptcha
+ *
  * @abstract
- * @package 
+ * @package
  * @copyright Copyright (C) 2011
- * @author Verdana Mu 
- * @license 
+ * @author Verdana Mu
+ * @license
  */
 abstract class AbstractCaptcha
 {
     /**
      * Captcha 设置信息
-     * 
+     *
      * @var bool
      * @access private
      */
@@ -26,7 +21,7 @@ abstract class AbstractCaptcha
         'imageDir'   => 'backgrounds/',
         'fontDir'    => 'fonts/',
         'dictFile'   => 'dict.dat',
-              
+
         // Images
         'width'      => 250,
         'height'     => 50,
@@ -37,15 +32,15 @@ abstract class AbstractCaptcha
         'length'     => 6,
         'font'       => 'Dink.ttf',
         'fontSize'   => 14,
-        'bgColor'    => array('r' => 255, 'g' => 255, 'b' => 255),
-        'textColor'  => array('r' => 0,   'g' => 0,   'b' => 0),
+        'bgColor'    => ['r' => 255, 'g' => 255, 'b' => 255],
+        'textColor'  => ['r' => 0,   'g' => 0,   'b' => 0],
     );
 
-    /* public __construct(array $options = array()) {{{ */ 
+    /* public __construct(array $options = array()) {{{ */
     /**
      * __construct
-     * 
-     * @param array $options 
+     *
+     * @param array $options
      * @access public
      * @return void
      */
@@ -68,15 +63,9 @@ abstract class AbstractCaptcha
             foreach ($options as $k => $v) {
                 if (isset($this->_data[$k])) {
                     if (false !== stripos($k, 'color')) {
-                        if (is_array($v)) {
-                            foreach ($v as &$color) {
-                                if (is_string($color)) {
-                                    $color = $this->toRGB($v);
-                                }
-                            }
-                        } elseif (is_string($v)) {
-                            $v = $this->toRGB($v);
-                        }
+                        $v   = (array) $v;
+                        $key = array_rand($v);
+                        $v   = $this->toRGB($v[$key]);
                     }
                     $this->_data[$k] = $v;
                 }
@@ -85,11 +74,11 @@ abstract class AbstractCaptcha
     }
     // }}}
 
-    /* public __isset($key) {{{ */ 
+    /* public __isset($key) {{{ */
     /**
      * __isset
-     * 
-     * @param mixed $key 
+     *
+     * @param mixed $key
      * @access public
      * @return void
      */
@@ -99,11 +88,11 @@ abstract class AbstractCaptcha
     }
     // }}}
 
-    /* public __get($key) {{{ */ 
+    /* public __get($key) {{{ */
     /**
      * __get
-     * 
-     * @param mixed $key 
+     *
+     * @param mixed $key
      * @access public
      * @return void
      */
@@ -114,12 +103,12 @@ abstract class AbstractCaptcha
     }
     // }}}
 
-    /* public __set($key, $val) {{{ */ 
+    /* public __set($key, $val) {{{ */
     /**
      * __set
-     * 
-     * @param mixed $key 
-     * @param mixed $val 
+     *
+     * @param mixed $key
+     * @param mixed $val
      * @access public
      * @return void
      */
@@ -130,11 +119,11 @@ abstract class AbstractCaptcha
     }
     // }}}
 
-    /* protected toRGB(string $color) {{{ */ 
+    /* protected toRGB(string $color) {{{ */
     /**
      * toRGB
-     * 
-     * @param string $color 
+     *
+     * @param string $color
      * @access protected
      * @return void
      */
@@ -166,5 +155,4 @@ abstract class AbstractCaptcha
     // }}}
 }
 
-/*- vim: set ff=unix shiftwidth=4 tabstop=4 expandtab: -*/ 
-
+/*- vim: set ff=unix shiftwidth=4 tabstop=4 expandtab: -*/

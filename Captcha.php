@@ -16,36 +16,31 @@
  * limitations under the License.
  */
 
-/**
- * @namespace 
- */
-namespace net\phpvim;
-
-require_once 'AbstractCaptcha.php';
+require 'AbstractCaptcha.php';
 
 /**
  * Captcha Generator
- * 
- * @package 
+ *
+ * @package
  * @copyright Copyright (C) 2011
- * @author Verdana Mu 
- * @license 
+ * @author Verdana Mu
+ * @license
  */
 class Captcha extends AbstractCaptcha
 {
     /**
      * 随机字符串
-     * 
+     *
      * @var mixed
      * @access private
      */
     private $_word;
 
-    /* public __construct(array $options) {{{ */ 
+    /* public __construct(array $options) {{{ */
     /**
      * __construct
-     * 
-     * @param array $options 
+     *
+     * @param array $options
      * @access public
      * @return void
      */
@@ -58,15 +53,17 @@ class Captcha extends AbstractCaptcha
         $this->_word = $this->random();
 
         // 保存到 Session
-        session_start();
-        $_SESSION['Captcha'] = $this->_word;
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        $_SESSION['captcha'] = $this->_word;
     }
     // }}}
 
-    /* public getWord() {{{ */ 
+    /* public getWord() {{{ */
     /**
      * 返回随机字符串
-     * 
+     *
      * @access public
      * @return void
      */
@@ -76,10 +73,10 @@ class Captcha extends AbstractCaptcha
     }
     // }}}
 
-    /* public create() {{{ */ 
+    /* public create() {{{ */
     /**
      * 生成图片
-     * 
+     *
      * @access public
      * @return void
      */
@@ -127,12 +124,12 @@ class Captcha extends AbstractCaptcha
     }
     // }}}
 
-    /* protected createCanvas($width, $height) {{{ */ 
+    /* protected createCanvas($width, $height) {{{ */
     /**
-     * 生成初始的图片模型
-     * 
-     * @param mixed $width 
-     * @param mixed $height 
+     * 生成初始的图片画布
+     *
+     * @param mixed $width
+     * @param mixed $height
      * @access protected
      * @return void
      */
@@ -175,11 +172,11 @@ class Captcha extends AbstractCaptcha
     }
     // }}}
 
-    /* protected random() {{{ */ 
+    /* protected random() {{{ */
     /**
      * 生成随即的字符串
      * 每个字符之间将被随机插入1-3个空格
-     * 
+     *
      * @access protected
      * @return void
      */
@@ -203,10 +200,10 @@ class Captcha extends AbstractCaptcha
         static $color;
     }
 
-    /* protected preventCache() {{{ */ 
+    /* protected preventCache() {{{ */
     /**
      * preventCache
-     * 
+     *
      * @access protected
      * @return void
      */
@@ -226,5 +223,4 @@ class Captcha extends AbstractCaptcha
     // }}}
 }
 
-/*- vim: set ff=unix shiftwidth=4 tabstop=4 expandtab: -*/ 
-
+/*- vim: set ff=unix shiftwidth=4 tabstop=4 expandtab: -*/
