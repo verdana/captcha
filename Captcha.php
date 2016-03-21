@@ -34,7 +34,7 @@ class Captcha extends AbstractCaptcha
      * @var mixed
      * @access private
      */
-    protected $_word;
+    protected $word;
 
     /* public __construct(array $options) {{{ */
     /**
@@ -50,13 +50,13 @@ class Captcha extends AbstractCaptcha
 
         // 生成一段随机的字符串，并保存到设置中
         // TODO 支持字典模式
-        $this->_word = $this->random();
+        $this->word = $this->random();
 
         // 保存到 Session
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }
-        $_SESSION['captcha'] = $this->_word;
+        $_SESSION['captcha'] = $this->word;
     }
     // }}}
 
