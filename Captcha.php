@@ -34,7 +34,7 @@ class Captcha extends AbstractCaptcha
      * @var mixed
      * @access private
      */
-    private $_word;
+    protected $_word;
 
     /* public __construct(array $options) {{{ */
     /**
@@ -60,19 +60,6 @@ class Captcha extends AbstractCaptcha
     }
     // }}}
 
-    /* public getWord() {{{ */
-    /**
-     * 返回随机字符串
-     *
-     * @access public
-     * @return void
-     */
-    public function getWord()
-    {
-        return $this->_word;
-    }
-    // }}}
-
     /* public create() {{{ */
     /**
      * 生成图片
@@ -87,19 +74,18 @@ class Captcha extends AbstractCaptcha
             throw new \Exception('Image Captcha requires font');
         }
 
-        // create the image
         $width     = $this->width;
         $height    = $this->height;
         $size      = $this->fontSize;
         $image     = $this->createCanvas($width, $height);
         $textColor = ImageColorAllocate($image, $this->textColor['r'], $this->textColor['g'], $this->textColor['b']);
 
-        $hpos = $size; // horizontal pos
-        $word = $this->getWord();
+        $hpos = $size;
+        $word = $this->word;
         for ($i = 0; $i < $this->length; $i ++) {
             $char = $word[$i];
 
-            // convert char to low/upper/random case.
+            // 控制字符的大小写
             if ($this->charCase == 'upper') {
                 $char = strtoupper($char);
             } elseif ($this->charCase == 'lower') {
@@ -109,15 +95,13 @@ class Captcha extends AbstractCaptcha
                 $char = $func($char);
             }
 
-            $vpos = mt_rand($size * 1.3, $size * 2.0); // random vertical pos
+            $vpos = mt_rand($size * 1.3, $size * 2.0);
             ImageFtText($image, $size, mt_rand(-25, 50), $hpos, $vpos, $textColor, $fontPath, $char);
             $hpos += mt_rand($size, $size * 1.8);
         }
 
-        // prevent client side caching
+        // 生成图片并发送到浏览器
         $this->preventCache();
-
-        // send image to browser
         header('Content-type: image/png');
         ImagePNG($image);
         ImageDestroy($image);
@@ -174,7 +158,7 @@ class Captcha extends AbstractCaptcha
 
     /* protected random() {{{ */
     /**
-     * 生成随即的字符串
+     * 生成随机的字符串
      * 每个字符之间将被随机插入1-3个空格
      *
      * @access protected
@@ -194,11 +178,6 @@ class Captcha extends AbstractCaptcha
         return substr($shuffle, 0, $this->length);
     }
     // }}}
-
-    protected function allocateColor($image)
-    {
-        static $color;
-    }
 
     /* protected preventCache() {{{ */
     /**
